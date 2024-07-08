@@ -1,0 +1,5 @@
+.section {
+  width: 100%;
+  background-image: url(/images/BG-photo.png);
+  background-size: cover;
+}
