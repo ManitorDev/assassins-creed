@@ -90,6 +90,7 @@ const Header = () => {
             </div>
           )}
         </div>
+        {"|"}
         <button>
           <Image
             src="/images/xbox icon.svg"
