@@ -21,6 +21,7 @@ const SectionHero = ({}: Props) => {
       {/* Purchase button */}
       <PurchaseButton>
         <span>purchase now </span>
+        {"|"}
         <span className={styles.price}>$14.99</span>
       </PurchaseButton>
       {/* Story link */}
@@ -50,7 +51,7 @@ const HeroSubtitle = ({ children }: { children: ReactNode }) => (
 
 // Purchase button component
 const PurchaseButton = ({ children }: { children: ReactNode }) => (
-  <button className={styles["section-hero-price-btn"]}>{children}</button>
+  <button className="section-hero-price-btn">{children}</button>
 );
 
 // Story link component
