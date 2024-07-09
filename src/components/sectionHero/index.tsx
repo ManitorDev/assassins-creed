@@ -16,9 +16,7 @@ type Props = {};
 const SectionHero = ({}: Props) => {
   return (
     // Container div with styles
-    <div
-      className={`h-screen ${styles.section} relative flex justify-center flex-col items-center`}
-    >
+    <div className={`${styles.container}`}>
       {/* Hero title */}
       <HeroTitle>survive at all costs</HeroTitle>
       {/* Hero subtitle */}
@@ -30,9 +28,7 @@ const SectionHero = ({}: Props) => {
         <span className={styles.price}>$14.99</span>
       </PurchaseButton>
       {/* Story link */}
-      <StoryLink
-        className={`absolute bottom-10 xl:left-[48%] cursor-pointer lg:left-[45%] md:left-[40%] left-[35%]`}
-      >
+      <StoryLink className={`${styles.storyLink}`}>
         <span>the story</span>
         <Image src="/images/scroll down.svg" alt="" width={40} height={40} />
       </StoryLink>
@@ -45,18 +41,7 @@ const effectFunc = (ref: React.RefObject<HTMLElement>) =>
   useEffect(() => {
     const el = ref.current;
 
-    gsap.fromTo(
-      el,
-      {
-        opacity: 0,
-        y: 100,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-      }
-    );
+    gsap.fromTo(el, { opacity: 0, y: 100 }, { opacity: 1, y: 0, duration: 1 });
   }, []);
 
 // Extracted components for better readability
@@ -69,11 +54,7 @@ const HeroTitle = ({ children }: { children: ReactNode }) => {
   effectFunc(titleRef);
   return (
     <div ref={titleRef}>
-      <span
-        className={`xl:text-6xl lg:text-5xl md:text-4xl text-3xl ${styles.heroTitle}`}
-      >
-        {children}
-      </span>
+      <span className={`${styles.heroTitle}`}>{children}</span>
     </div>
   );
 };
@@ -86,11 +67,7 @@ const HeroSubtitle = ({ children }: { children: ReactNode }) => {
   effectFunc(subtitleRef);
   return (
     <div ref={subtitleRef}>
-      <span
-        className={`xl:text-lg lg:text-base md:text-sm text-xs ${styles.heroSubtitle}`}
-      >
-        {children}
-      </span>
+      <span className={`${styles.heroSubtitle}`}>{children}</span>
     </div>
   );
 };
@@ -105,7 +82,7 @@ const PurchaseButton = ({ children }: { children: ReactNode }) => {
   return (
     <button
       ref={btnRef}
-      className={`section-hero-price-btn xl:text-lg lg:text-base md:text-sm text-xs ${styles.purchaseButton}`}
+      className={`${styles.purchaseButton} section-hero-price-btn`}
     >
       {children}
     </button>
