@@ -1,8 +1,13 @@
+"use client";
 // Import styles from the style module
 import styles from "@/styles/section-hero/style.module.css";
 // Import the Image component from Next.js
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Define the Props type (empty for now)
 type Props = {};
@@ -35,38 +40,77 @@ const SectionHero = ({}: Props) => {
   );
 };
 
+const effectFunc = (ref: React.RefObject<HTMLElement>) =>
+  // return useEffect function for gsap animation
+  useEffect(() => {
+    const el = ref.current;
+
+    gsap.fromTo(
+      el,
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+      }
+    );
+  }, []);
+
 // Extracted components for better readability
 
 // Hero title component
-const HeroTitle = ({ children }: { children: ReactNode }) => (
-  <div>
-    <span
-      className={`xl:text-6xl lg:text-5xl md:text-4xl text-3xl ${styles.heroTitle}`}
-    >
-      {children}
-    </span>
-  </div>
-);
+const HeroTitle = ({ children }: { children: ReactNode }) => {
+  // create refrence for gsap animation
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  effectFunc(titleRef);
+  return (
+    <div ref={titleRef}>
+      <span
+        className={`xl:text-6xl lg:text-5xl md:text-4xl text-3xl ${styles.heroTitle}`}
+      >
+        {children}
+      </span>
+    </div>
+  );
+};
 
 // Hero subtitle component
-const HeroSubtitle = ({ children }: { children: ReactNode }) => (
-  <div>
-    <span
-      className={`xl:text-lg lg:text-base md:text-sm text-xs ${styles.heroSubtitle}`}
-    >
-      {children}
-    </span>
-  </div>
-);
+const HeroSubtitle = ({ children }: { children: ReactNode }) => {
+  // create refrence for gsap animation
+  const subtitleRef = useRef<HTMLDivElement>(null);
+
+  effectFunc(subtitleRef);
+  return (
+    <div ref={subtitleRef}>
+      <span
+        className={`xl:text-lg lg:text-base md:text-sm text-xs ${styles.heroSubtitle}`}
+      >
+        {children}
+      </span>
+    </div>
+  );
+};
 
 // Purchase button component
-const PurchaseButton = ({ children }: { children: ReactNode }) => (
-  <button
-    className={`section-hero-price-btn xl:text-lg lg:text-base md:text-sm text-xs ${styles.purchaseButton}`}
-  >
-    {children}
-  </button>
-);
+const PurchaseButton = ({ children }: { children: ReactNode }) => {
+  // create refrence for gsap animation
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  effectFunc(btnRef);
+
+  return (
+    <button
+      ref={btnRef}
+      className={`section-hero-price-btn xl:text-lg lg:text-base md:text-sm text-xs ${styles.purchaseButton}`}
+    >
+      {children}
+    </button>
+  );
+};
 
 // Story link component
 const StoryLink = ({
